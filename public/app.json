@@ -1,0 +1,10 @@
+{
+  "ManifestVersion": 1,
+  "Name": "flowgear-bot-ui",
+  "Version": "0.1.0",
+  "DisplayName": "Flowgear Chatbot",
+  "EmbedMode": "menu",
+  "EmbedParameters": {
+    "After": "workflows"
+  }
+}
