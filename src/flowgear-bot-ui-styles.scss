@@ -1,23 +1,494 @@
 // START BOT STYLES //
-
+ 
+// Flowbot Tab
+ 
+// Chat Container
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
+  height: 75vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px #0f1229;
+  overflow: hidden;
+  margin-top: 4px;
+ 
+ 
+}
+ 
+// Chat Window
+.chat-window {
+  flex: 1;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  //padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border: 4px solid rgba(0, 255, 255, 0.7);
+  border-radius: 0px;
+  margin-left: 2px;
+ 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./components/flowbot/intergration.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size:1346px ;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 0;
+  }
+ 
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+ 
+// Welcome Message Bubble
+.welcome-bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  max-width: 90%;
+  padding: 40px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0px 4px 15px rgba(0, 255, 255, 0.5),
+              4px 4px 15px rgba(0, 255, 255, 0.5),
+              -4px -4px 15px rgba(197, 195, 72, 0.5);
+  border: 8px solid rgba(221, 228, 228, 0.7);
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+ 
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ 
+.default-bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 5%;
+  background-color: #41d1c3;
+  border-radius: 20px;
+  max-width: 90%;
+  padding: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #0f1229;
+  box-shadow: 0px 4px 15px #5cbbb1;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  text-transform: uppercase;
+  animation: slideUpFadeIn 1.5s ease-out;
+}
+ 
+@keyframes glow {
+  0% {
+    box-shadow: 0px 0px 20px rgba(12, 15, 15, 0.6),
+                0px 0px 30px rgba(26, 46, 46, 0.4);
+  }
+  100% {
+    box-shadow: 0px 0px 30px rgba(10, 10, 10, 0.8),
+                0px 0px 40px rgba(26, 41, 41, 0.4);
+  }
+}
+ 
+// User Message Bubble
+.user-bubble {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  margin: 8px 0;
+  text-align: right;
+  margin-right: 10px;
+ 
+  .avatar-container {
+    margin-left: 10px;
+    position: relative;
+    //
+    //
+  }
+ 
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #6e6e6e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+   
+  }
+ 
+  .message-text {
+    background-color: rgba(242, 194, 62, 1);
+    color: black;
+    border-radius: 10px;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+ 
+// Bot Message Bubble
+.bot-bubble {
+  display: flex;
+  align-items: flex-start;
+  margin: 8px 0;
+  margin-left: 10px;
+ 
+  .avatar-container {
+    margin-top: 10px;
+ 
+    margin-right: 15px;
+  }
+ 
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #40a1ce;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+ 
+  .message-text {
+    background-color: #41d1c3;
+    color: black;
+    border-radius: 15px;
+    max-width: 80%;
+    font-style: italic;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+ 
+.markdown-container p {
+  color: #333333; /* Default text color */
+  padding: 8px;
+  font-size: medium;
+  /* font-weight: bold; */
+  /* padding: 8px 8px 0px 8px; */
+  margin-bottom: -1px;
+}
+ 
+.markdown-container a {
+  color: #0c3dc5; /* Link color */
+  text-decoration: underline;
+  font-size: medium;
+}
+ 
+.avatar-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+ 
+// Input Box
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #455a64;
+  border: 4px solid rgba(0, 255, 255, 0.7);
+  border-top: none;
+  margin-left: 2px;
+}
+ 
+.input-box {
+  flex: 1;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.3),
+              0px 4px 15px rgba(0, 0, 0, 0.2),
+              0px 0px 15px rgba(255, 165, 0, 0.5);
+  border: 4px solid rgba(16, 17, 17, 0.7);
+  border-radius: 10px;
+}
+ 
+.send-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: rgba(242, 194, 62, 1);
+  color: black;
+  border: 2px solid rgba(221, 228, 228, 0.7);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 550;
+}
+ 
+// Toolbar
+// .flowbot-toolbar-container {
+//   margin-top: -45px;
+//   margin-left: 0;
+//   background-color: #0f1229;
+//   text-align: center;
+// }
+ 
+// .bot-toolbar {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   background-color: white;
+//   color: #333;
+//   font-family: "Montserrat", sans-serif;
+//   border-bottom: 1px solid #ddd;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
+//   .toolbar-actions {
+//     display: flex;
+//     gap: 10px;
+//     align-items: center;
+//   }
+ 
+  .toolbar-button {
+    color: #101228;
+    background-color: rgba(242, 194, 62, 1);
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+ 
+    &:hover {
+      background-color: rgba(242, 194, 62, 1);
+    }
+ 
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+ 
+  .toolbar-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(29, 28, 28);
+    margin-left: 1em;
+  }
+  .loader {
+    display: inline-flex;
+    justify-content: space-between;
+    min-width: 50px; /* Fixed width to fit the dots */
+    height: 40px; /* Adjust height as needed */
+    position: relative;
+    padding: 12px;
+  }
+ 
+  .loader .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #1e90ff;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+ 
+  .loader .dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .loader .dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .loader .dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+ 
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+ 
+ 
+  .loader {
+    display: inline-block;
+    width: 30px; /* Fixed width for alignment */
+    font-weight: bold;
+    text-align: left; /* Ensures the dots align correctly */
+    font-size: 16px; /* Adjust as needed for visibility */
+    color: #141414; /* Matches your design */
+  }
+ 
+  @keyframes typingDots {
+    0% {
+      content: ".";
+    }
+    33% {
+      content: "..";
+    }
+    66% {
+      content: "...";
+    }
+    100% {
+      content: "";
+    }
+  }
+ 
+  .loader::after {
+    content: ".";
+    animation: typingDots 1.2s steps(3, end) infinite;
+  }
+ 
+ 
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(242, 194, 62, 1);
+}
+ 
+.typing-indicator .dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background-color: rgba(242, 194, 62, 1);
+    animation: typing 1.5s infinite ease-in-out;
+}
+ 
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+ 
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+ 
+@keyframes typing {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+ 
+.suggested-prompts-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+}
+ 
+.suggested-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+ 
+.prompt-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 105px;
+  background-color: #f0bc2e !important;
+  color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0px 4px 15px #3fa89e;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+   
+  animation: slideUpFadeIn 1.5s ease-out; /* Apply fade-in and slide-up animation */
+}
+ 
+.prompt-card:hover {
+  background-color: #ffd966;
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  border: #0f1229;
+  border: 4px solid rgb(233, 228, 215);
+}
+ 
+.prompt-card:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+.prompt-image {
+  width: 50px; /* Image width */
+  height: 40px; /* Image height */
+  object-fit: cover; /* Ensure image fits nicely */
+  margin-bottom: 5px; /* Space between image and text */
+  border-radius: 50%;
+  border-color: #101228;
+  border-radius: 5px; /* Optional: Make image circular */
+}
+ 
+.prompt-text {
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+ 
+ 
 // END BOT STYLES //
-
+ 
 // START CHAT STYLES //
-
+ 
 // END CHAT STYLES //
-
+ 
 //////////////////////////
 // DARK THEME OVERRIDES //
 /////////////////////////
-
+ 
 .theme-dark {
   color: white;
   fill: white;
   // START BOT STYLES //
-
+ 
   // END BOT STYLES //
-
+ 
   // START CHAT STYLES //
-
+ 
   // END CHAT STYLES //
 }

@@ -1,9 +1,15 @@
 import React from "react";
 import { FunctionComponent } from "react";
 
-interface FlowbotToolbarProps {}
+interface FlowbotToolbarProps {
+  onStartNewChat: () => void;
+  onRefreshChat: () => void;
+}
 
-const FlowbotToolbar: FunctionComponent<FlowbotToolbarProps> = () => {
+const FlowbotToolbar: FunctionComponent<FlowbotToolbarProps> = ({
+  onStartNewChat,
+  onRefreshChat,
+}) => {
   return (
     <React.Fragment>
       <div className="container-fluid toolbar-container">
@@ -15,7 +21,7 @@ const FlowbotToolbar: FunctionComponent<FlowbotToolbarProps> = () => {
             <button
               className="btn btn-command btn-command-text btn-command-emphasis m-2"
               type="button"
-              //onClick={onStartNewChat}
+              onClick={onStartNewChat} // Wire up the New Chat button
             >
               <svg>
                 <use xlinkHref="#fgicon-plus"></use>
@@ -25,7 +31,7 @@ const FlowbotToolbar: FunctionComponent<FlowbotToolbarProps> = () => {
             <button
               className="btn btn-default btn-command m-2"
               title="Refresh Chat"
-              //onClick={onRefreshChat}
+              onClick={onRefreshChat} // Wire up the Refresh button
             >
               <svg>
                 <use xlinkHref="#fgicon-sync"></use>
