@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-//import McqToolbar from "./mcqToolbar";
 import McqBody from "./mcqBody";
 import McqBodyScoreCalculator from "./mcqBodyScoreCalculator";
 import McqToolBarQuestionNavigator from "./mcqToolBarQuestionNavigator";

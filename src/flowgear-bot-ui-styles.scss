@@ -162,7 +162,7 @@
 // Bot Message Bubble
 .bot-bubble {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   margin: 8px 0;
   margin-left: 10px;
  
@@ -421,6 +421,11 @@
   gap: 16px;
   justify-content: center;
 }
+
+img-top {
+    flex-shrink: 0;
+    /* width: 100%; */
+}
  
 .prompt-card {
   display: flex;
@@ -462,6 +467,7 @@
   border-radius: 50%;
   border-color: #101228;
   border-radius: 5px; /* Optional: Make image circular */
+  width: 40% !important;
 }
  
 .prompt-text {
