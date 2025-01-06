@@ -3,7 +3,7 @@ import ThemeContext from "contexts/themeContext";
 import navigationContext from "contexts/navigationContext";
 import { useContext, useState } from "react";
 import FlowbotTab from "./flowbot/flowbotTab";
-import McqQuestionsTab from "./mcqQuestions/mcqQuestionsTab";
+import McqNavBarTab from "./mcqQuestions/mcqNavBarTab";
 
 export interface AppContentProps {}
 
@@ -23,7 +23,7 @@ const AppContent: React.FunctionComponent<AppContentProps> = (props) => {
       case "Flowbot":
         return <FlowbotTab handleNavigationChange={handleNavChange} />;
       case "McqQuestions":
-        return <McqQuestionsTab handleNavigationChange={handleNavChange} />;
+        return <McqNavBarTab handleNavigationChange={handleNavChange} />;
       default:
         break;
     }

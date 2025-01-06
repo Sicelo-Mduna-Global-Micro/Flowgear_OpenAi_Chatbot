@@ -473,9 +473,409 @@
  
 // END BOT STYLES //
  
-// START CHAT STYLES //
+
+// START QUIZ STYLES //
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.mcqBody_outer_container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mcqBody_inner_container {
+  background-color: #455A64;
+  margin-top: 40px !important;
+  color: #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 1000px;
+  height: 370px;
+  box-shadow: 30px 30px 30px rgba(0, 0, 0, 1.9);
+  transition: all 0.5s ease;
+  position: relative;
+  /* animation: breathing 20s infinite ease-in-out; */
+}
+
+.mcqBody_inner_container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 20px;
+  z-index: -1;
+  box-shadow: 0 0 15px 5px rgba(47, 61, 143, 1.5);
+  //animation: glow 0.5s infinite alternate;
+}
+
+.mcqBody_inner_container > p {
+  font-size: 25px;
+}
+
+.options_outer_wrapper {
+  width: 75%;
+  margin-left: 175px !important;
+  margin-top: 20px;
+}
+
+#options {
+  margin-left: -95px !important;
+  margin-top: 20px;
+}
+
+.options {
+  position: relative;
+  margin-left: 5px !important;
+  padding-left: 40px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.options:hover {
+  box-shadow: 0 0 15px rgba(33, 191, 115, 0.7), 0 0 10px rgba(33, 191, 115, 0.4);
+  color: #a8e6cf; /* Light green text color on hover */
+  text-shadow: 0 0 10px rgba(169, 169, 169, 0.7), 0 0 20px rgba(169, 169, 169, 0.7); /* Dark grey glow effect */
+}
+
+#options label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 21px;
+  cursor: pointer;
+  color: #ddd;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.checkmark {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #555;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: box-shadow, transform;
+}
+
+.options input {
+  opacity: 0;
+}
+
+.options:hover .checkmark {
+  background-color: #555;
+  box-shadow: 0 6px 12px rgba(33, 191, 115, 0.6); /* Additional glow on the checkmark */
+}
+
+.options .checkmark:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  display: block;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.options input:checked ~ .checkmark:after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.options:hover {
+  color: #21bf73; /* Green text color on hover */
+}
+
+.options:hover .checkmark {
+  background-color: #555;
+  box-shadow: none;
+}
+
+.options:hover .checkmark:after {
+  transform: translate(-50%, -50%) scale(0); /* Disable inner scale effect on hover */
+}
+
+.options input:checked ~ label {
+  color: #21bf73; /* Green text color when selected */
+}
+
+.options input:checked ~ .checkmark {
+  background-color: #21bf73;
+  box-shadow: 0 6px 12px rgba(33, 191, 115, 0.6); /* Green glow for selected checkmark */
+}
+
+.btn-primary {
+  background-color: #555;
+  color: #ddd;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #21bf73;
+  border: 1px solid #21bf73;
+  box-shadow: 0 6px 12px rgba(33, 191, 115, 0.7), 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.btn-success {
+  padding: 10px 25px;
+  background-color: #21bf73;
+  border: 1px solid #21bf73;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.btn-success:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(33, 191, 115, 0.9), 0 4px 10px rgba(0, 0, 0, 0.1);
+  filter: brightness(1.2);
+}
+
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (max-width: 576px) {
+  .options_outer_wrapper {
+    width: 100%;
+    word-spacing: 2px;
+  }
+}
+
+.btn-danger.submit-quiz-btn {
+  padding: 5px 25px;
+  background-color: #e63946;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(230, 57, 70, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-danger.submit-quiz-btn:hover {
+  background-color: #d62828;
+  box-shadow: 0 6px 12px rgba(214, 40, 40, 0.9);
+  transform: translateY(-2px);
+}
+
+.score-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+.score-display h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.7);
+  margin-top: -210px;
+}
+
+.glowing-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 
+    2px 2px 3px rgba(0, 0, 0, 0.7),
+    0 0 5px rgba(255, 255, 255, 0.7),
+    0 0 10px rgba(255, 255, 255, 0.6);
+  animation: glowingText 1.5s ease-in-out infinite;
+}
+
+.score-message {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.pass-message {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.fail-message {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.retake-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.retake-btn:hover {
+  background-color: #0056b3;
+}
+
+.question_button{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 25px;
+  font-size: 23px;
+  margin-right: 0 !important;
+  margin-left: -220px;
+  margin-top: -45px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-transform: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(145deg, #6e7f80, #4e5a5c);
+  color: #fff;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), -4px -4px 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 950px;  /* Fixed width */
+  height: 70px;  /* Fixed height */
+}
+
+.question_button span {
+  display: block;
+  flex-grow: 1;
+}
+
+.btn-modern {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 25px;
+  font-size: 23px;
+  margin-right: 0 !important;
+  margin-left: -220px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-transform: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(145deg, #6e7f80, #4e5a5c);
+  color: #fff;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), -4px -4px 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 950px;  /* Fixed width */
+  height: 70px;  /* Fixed height */
+}
+
+.btn-modern span {
+  display: block;
+  flex-grow: 1;
+}
+
+.btn-modern {
+  margin-top: -45px;
+}
+
+/*****************************************************************/
+/* Styling the container for the blocks */
+.question-blocks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align rows at the top */
+  align-items: center;
+  width: 100%; /* Ensure full width usage */
+  margin: 0 auto; /* Center the container */
+  margin-top: -20px !important; /* Ensure no padding at the top */
+}
+
+/* Question rows should wrap flexibly and adjust based on screen size */
+.question-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of blocks */
+  justify-content: flex-start; /* Align blocks to the start */
+  width: 100%; /* Occupy full width */
+  gap: 5px; /* Space between blocks */
+}
+
+.question-block {
+  flex: 1 1 calc(20% - 10px); /* Allow blocks to grow and fill space, taking 20% of the width minus margin */
+  margin: 5px;
+  max-width: 150px; /* Optional: Limit max width for responsive design */
+  height: 40px; /* Uniform height */
+  text-align: center;
+  line-height: 40px; /* Center text vertically */
+  cursor: pointer;
+  font-size: 14px; /* Adjust text size */
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effects */
+.question-block:hover {
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2), -8px -8px 16px rgba(255, 255, 255, 0.4); /* Deeper 3D effect */
+  transform: translateY(-4px); /* Slight lift effect on hover */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .question-block {
+    flex: 1 1 calc(33.33% - 10px); /* For smaller screens, take up 33% of the width */
+  }
+}
+
+@media (max-width: 480px) {
+  .question-block {
+    flex: 1 1 calc(50% - 10px); /* For very small screens, take up 50% of the width */
+  }
+}
+
+  .force-dark{
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
  
-// END CHAT STYLES //
+// END QUIZ STYLES //
  
 //////////////////////////
 // DARK THEME OVERRIDES //
