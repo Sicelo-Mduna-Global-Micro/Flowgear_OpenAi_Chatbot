@@ -4,6 +4,7 @@ import InputBox from "./flowbotInputBox";
 import BotToolbar from "./flowbotToolbar";
 import OpenAIIntegration from "services/flowbotService";
 import SuggestedPrompts from "./flowbotSuggestedPrompts";
+import Loader from "components/common/loader";
 
 interface FlowBotTabProps {
   handleNavigationChange: (navTarget: string, routeParams?: {}) => void;
@@ -16,6 +17,7 @@ interface FlowBotTabState {
   typingIndicator: string;
   botTypedMessage: string;
   hasStarted: boolean;
+  resetting: boolean;
 }
 
 class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
@@ -31,7 +33,11 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
     typingIndicator: "",
     botTypedMessage: "",
     hasStarted: false,
+    resetting: false,
   };
+
+  typingInterval: NodeJS.Timeout | null = null;
+  simulateTypingInterval: NodeJS.Timeout | null = null;
 
   componentDidUpdate(_, prevState: FlowBotTabState) {
     if (this.state.isBotTyping && !prevState.isBotTyping) {
@@ -39,13 +45,18 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
     }
   }
 
+  componentWillUnmount() {
+    if (this.typingInterval) clearInterval(this.typingInterval);
+    if (this.simulateTypingInterval) clearInterval(this.simulateTypingInterval);
+  }
+
   startTypingIndicator = () => {
     const indicatorCycle = [".", "..", "..."];
     let index = 0;
 
-    const interval = setInterval(() => {
+    this.typingInterval = setInterval(() => {
       if (!this.state.isBotTyping) {
-        clearInterval(interval);
+        if (this.typingInterval) clearInterval(this.typingInterval);
         this.setState({ typingIndicator: "" });
       } else {
         this.setState({ typingIndicator: indicatorCycle[index] });
@@ -55,6 +66,7 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
   };
 
   handleSendMessage = async () => {
+    if (this.state.resetting) return;
     const { userInput, messages } = this.state;
 
     if (!userInput.trim()) return;
@@ -90,6 +102,43 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
     }
   };
 
+  simulateTyping = (response: string) => {
+    let index = 0;
+
+    this.simulateTypingInterval = setInterval(() => {
+      if (index < response.length) {
+        this.setState((prevState) => ({
+          botTypedMessage: prevState.botTypedMessage + response[index],
+        }));
+        index++;
+      } else {
+        if (this.simulateTypingInterval)
+          clearInterval(this.simulateTypingInterval);
+        this.setState((prevState) => ({
+          isBotTyping: false,
+          botTypedMessage: "",
+          messages: [...prevState.messages, { sender: "bot", text: response }],
+        }));
+      }
+    }, 5);
+  };
+
+  handleNewChat = () => {
+    this.setState({ resetting: true });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
+
+  handleRefresh = () => {
+    this.setState({ resetting: true });
+
+    setTimeout(() => {
+      this.setState({ resetting: false });
+    }, 3000);
+  };
+
   handlePromptClick = async (prompt: string) => {
     this.setState((prevState) => ({
       hasStarted: true,
@@ -118,44 +167,6 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
     }
   };
 
-  simulateTyping = (response: string) => {
-    let index = 0;
-
-    const interval = setInterval(() => {
-      if (index < response.length) {
-        this.setState((prevState) => ({
-          botTypedMessage: prevState.botTypedMessage + response[index],
-        }));
-        index++;
-      } else {
-        clearInterval(interval);
-        this.setState((prevState) => ({
-          isBotTyping: false,
-          botTypedMessage: "",
-          messages: [...prevState.messages, { sender: "bot", text: response }],
-        }));
-      }
-    }, 50);
-  };
-
-  handleNewChat = () => {
-    this.setState({
-      isBotTyping: false,
-      botTypedMessage: "",
-      messages: [
-        {
-          sender: "default",
-          text: "Welcome to Flowgear Assistant! I'm here to help you learn how to use Flowgear. Ask me anything!",
-        },
-      ],
-      hasStarted: false,
-    });
-  };
-
-  handleRefresh = () => {
-    window.location.reload();
-  };
-
   render() {
     const {
       messages,
@@ -164,6 +175,7 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
       typingIndicator,
       botTypedMessage,
       hasStarted,
+      resetting,
     } = this.state;
 
     return (
@@ -183,6 +195,10 @@ class FlowBotTab extends React.Component<FlowBotTabProps, FlowBotTabState> {
                 <SuggestedPrompts onPromptClick={this.handlePromptClick} />
               ) : null
             }
+            loader={
+              resetting ? <Loader title="Refreshing chat..." /> : undefined
+            }
+            hasStarted={hasStarted}
           />
           <InputBox
             userInput={userInput}
