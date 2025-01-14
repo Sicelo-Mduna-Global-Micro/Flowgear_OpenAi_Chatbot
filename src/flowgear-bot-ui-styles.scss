@@ -154,8 +154,7 @@
  
   .message-text {
     background-color: rgba(242, 194, 62, 1);
-    line-height: 2.0;
-    letter-spacing: 0.3px;
+    line-height: 1.5;
     padding-top: 10px;
     font-size: 16px;
     font-family: 'Inter', 'Roboto', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -208,15 +207,14 @@ a:hover, a:focus {
   .message-text {
     background-color: #80ebe1f0;
     font-family: 'Inter', 'Roboto', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 2.0;
-    letter-spacing: 0.3px;
+    line-height: 1.5;
     padding-top: 15px;
     text-align: justify;
     padding-left: 10px;
     font-size: 20px;
     color: black;
     border-radius: 15px;
-    max-width: 80%;
+    //max-width: 80%;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   }
 }
