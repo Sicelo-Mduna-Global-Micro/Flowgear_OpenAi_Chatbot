@@ -254,7 +254,11 @@ a:hover, a:focus {
  
 .input-box {
   flex: 1;
-  padding: 10px;
+  font-family: 'Inter', 'Roboto', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 2.0;
+  letter-spacing: 0.3px;
+  font-size: 18px;
+  padding: 5px;
   background-color: white;
   box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.3),
               0px 4px 15px rgba(0, 0, 0, 0.2),
